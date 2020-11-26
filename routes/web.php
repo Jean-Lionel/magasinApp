@@ -23,3 +23,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/courses','CourseController@index');
+
+Route::get('product/create', 'ProductController@create')->name('product.create');
+
+Route::resource('stockes', StockeController::class);
+Route::resource('products', ProductController::class);
+Route::resource('clients', ClientController::class);
+Route::resource('categories', CategoryController::class);

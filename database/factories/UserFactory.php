@@ -17,6 +17,16 @@ class UserFactory extends Factory
 
     /**
      * Define the model's default state.
+
+     title
+description
+
+name
+email
+email_verified_at
+password
+current_team_id
+profile_photo_path
      *
      * @return array
      */
@@ -24,6 +34,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+           
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
