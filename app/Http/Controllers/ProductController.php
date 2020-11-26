@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,13 @@ class ProductController extends Controller
     public function create(Request $request)
     {
 
-        return view('products.create');
+        $categories = Category::all();
+
+        return view('products.create',compact('categories'));
     }
     /**
      * Store a newly created resource in storage.
-     *
+     * 'code_product','name','price','date_expiration','quantite'
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,12 +45,15 @@ class ProductController extends Controller
         $request->validate([
         'name' => 'required|max:255',
         'price' => 'required|min:0',
+        'code_product' => 'required',
+        'date_expiration' => 'required|date',
+        'quantite' => 'numeric|min:0',
 
         ]);
 
         Product::create($request->all());
 
-        return $this->index();
+        return back();
     }
 
     /**
@@ -71,7 +77,10 @@ class ProductController extends Controller
     {
         //
 
-        return view('products.edit', compact('product'));
+         $categories = Category::all();
+
+
+        return view('products.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -88,6 +97,9 @@ class ProductController extends Controller
          $request->validate([
         'name' => 'required|max:255',
         'price' => 'required|min:0',
+        'code_product' => 'required',
+        'date_expiration' => 'required|date',
+        'quantite' => 'numeric|min:0',
 
         ]);
 

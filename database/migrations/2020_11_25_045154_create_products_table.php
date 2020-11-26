@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('code_product');
             $table->string('name');
+            $table->string('unite_mesure')->nullable();
             $table->float('quantite');
             $table->float('price');
             $table->date('date_expiration');

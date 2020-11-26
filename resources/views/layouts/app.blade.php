@@ -16,14 +16,16 @@
 			<nav id="sidebar" class="active">
 				<h1><a href="" class="logo">M.</a></h1>
         <ul class="list-unstyled components mb-5">
+          
+          <li>
+              <a href="{{ route('clients.index') }}"><span class="fa fa-shopping-cart"></span> Vente</a>
+          </li>
+
           <li class="active">
-            <a href="{{ route('products.index') }}"><span class="fa fa-home"></span> Produit</a>
+            <a href="{{ route('products.create') }}"><span class="fa fa-product-hunt"></span> Entre</a>
           </li>
           <li>
-              <a href="{{ route('clients.index') }}"><span class="fa fa-user"></span> Client</a>
-          </li>
-          <li>
-            <a href="{{ route('stockes.index') }}"><span class="fa fa-sticky-note"></span> Stock</a>
+            <a href="{{ route('products.index') }}"><span class="fa fa-sticky-note"></span> Stock</a>
           </li>
           <li>
             <a href="#"><span class="fa fa-cogs"></span> Services</a>

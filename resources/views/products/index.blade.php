@@ -24,9 +24,12 @@
 		<thead>
 			<tr>
 				<th scope="col">#</th>
+				<th scope="col">CODE</th>
 				<th scope="col">Designation</th>
 				<th scope="col">Prix</th>
-				<th scope="col">Date de creation</th>
+				<th scope="col">Qte</th>
+				<th scope="col">Date d'expiration</th>
+				<th scope="col">Date d'entre</th>
 				<th scope="col">Action</th>
 			</tr>
 		</thead>
@@ -36,12 +39,14 @@
 			{{-- expr --}}
 			<tr>
 				<td>{{ $value->id }}</td>
+				<td>{{ $value->code_product }}</td>
 				<td>
 					{{ $value->name}}
 				</td>
 
 				<td>{{ $value->price }}</td>
-				<td>{{ $value->description }}</td>
+				<td>{{ $value->quantite }}</td>
+				<td>{{ $value->date_expiration }}</td>
 				<td>{{ $value->created_at }}</td>
 				<td class="d-flex justify-content-around">
 					<a href="{{ route('products.edit', $value) }}" class="btn btn-outline-info btn-sm mr-2">Modifier</a>
