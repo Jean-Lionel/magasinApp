@@ -22,7 +22,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/courses','CourseController@index');
 
 Route::get('product/create', 'ProductController@create')->name('product.create');
 
@@ -37,8 +36,15 @@ Route::resource('categories', CategoryController::class);
 
 Route::post('panier/ajouter','CartController@store')->name('panier.store');
 Route::get('panier/index','CartController@index')->name('panier.index');
-Route::delete('cart/delete/{$rowId}','CartController@destroy')->name('d');
+Route::delete('panier/{id}', 'CartController@destroy')->name('cart.destroy');
+Route::patch('panier/{rowId}', 'CartController@update')->name('cart.update');
+
+Route::post('update_panier', 'CartController@updatePanier')->name('cart.update_panier');
 
 Route::get('/vider', function(){
 	Cart::destroy();
 });
+
+//Checkout Router PayMent
+
+Route::get('payement','CheckoutController@index')->name('payement');

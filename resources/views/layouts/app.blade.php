@@ -3,6 +3,7 @@
 <head>
  <title>GESTION MAGASIN</title>
  <meta charset="utf-8">
+ <meta name="csrf-token" content="{{ csrf_token() }}">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -101,6 +102,18 @@
         </button>
       </div>
       @endif
+
+
+      @if (session('error'))
+      {{-- expr --}} 
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>SUCCESS</strong> {{ session('success')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @endif
     </div>
 
     @yield('content')
@@ -111,9 +124,16 @@
 </div>
 </div>
 
-<script src="{{ asset('js/jquery.min.js') }}"></script>
+
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('js/popper.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+
 <script src="{{ asset('js/main.js') }}"></script>
+
+
+@yield('javascript')
+
 </body>
 </html>

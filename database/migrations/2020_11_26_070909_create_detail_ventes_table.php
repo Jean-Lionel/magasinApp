@@ -23,7 +23,8 @@ class CreateDetailVentesTable extends Migration
             $table->string('name')->nullable();
             $table->string('unite_mesure')->nullable();
             $table->date('date_expiration');
-            $table->foreignId('vente_id')->references('ventes')->on('id')->onDelete('cascade');
+
+            $table->integer('vente_id');
             $table->timestamps();
             $table->softDeletes();
         });

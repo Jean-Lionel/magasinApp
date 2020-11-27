@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -39,8 +41,6 @@ class CartController extends Controller
     public function store(Request $request)
     {
 
-        
-
         $diplucata = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id == $request->id;
         });
@@ -52,7 +52,7 @@ class CartController extends Controller
 
         $product = Product::where('id',$request->id)->firstOrFail();
 
-        Cart::add($product->id, $product->name, 1, $product->price)->associate(App\Models\Product::class);
+        Cart::add($product->id, $product->name, 1, $product->price)->associate('App\Models\Product');
 
         return redirect()->route('products.index')->with('success', 'Le produit a ete bien ajoute');
     }
@@ -79,6 +79,29 @@ class CartController extends Controller
         //
     }
 
+    public function updatePanier(Request $request){
+
+
+        $data = $request->all();
+
+       $validate = Validator::make($data, [
+            'qty' => 'required|numeric|between:1,21'
+
+        ]);
+
+       if($validate->fails()){
+         Session::flash('error', 'Les donneés ne sont pas correctes');
+
+        return response()->json(['error','error']);
+
+       }
+
+        Cart::update($data['rowId'], $data['qty']);
+        Session::flash('success', 'La quatite a été bien mise à jour');
+
+        return response()->json(['success','réussi']);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -86,9 +109,19 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rowId)
     {
         //
+
+
+
+        $data = $request->json()->all();
+
+        Cart::update($rowId, $data['qty']);
+        Session::flash('success', 'La quatité mise a jour');
+
+        return response()->json(['success','resussi']);
+
     }
 
     /**
@@ -99,11 +132,14 @@ class CartController extends Controller
      */
     public function destroy($rowId)
     {
+
         
-        //
 
         Cart::remove($rowId);
 
         return back()->with('success', 'Suppression avec success');
     }
+
+
+    
 }
