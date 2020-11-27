@@ -56,6 +56,14 @@
 					<button class="btn btn-outline-danger btn-sm delete_client">Supprimer</button>
 				</form>
 
+				<form action="{{ route('panier.store') }}" method="post">
+					@csrf
+
+					<input type="hidden" name="id" value="{{$value->id}}">
+					
+					<button  type="submit" class="btn btn-sm btn-danger">+</button>
+				</form>
+
 
 				</td>
 			</tr>

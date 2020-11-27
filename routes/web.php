@@ -30,3 +30,15 @@ Route::resource('stockes', StockeController::class);
 Route::resource('products', ProductController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('categories', CategoryController::class);
+
+
+//Cart ROUTE
+
+
+Route::post('panier/ajouter','CartController@store')->name('panier.store');
+Route::get('panier/index','CartController@index')->name('panier.index');
+Route::delete('cart/delete/{$rowId}','CartController@destroy')->name('d');
+
+Route::get('/vider', function(){
+	Cart::destroy();
+});
