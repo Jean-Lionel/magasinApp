@@ -2,20 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Vente;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class VenteController extends Controller
 {
     /**
      * Display a listing of the resource.
+quantite
+category_id
+
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view();
-    }
+public function index()
+{
+
+
+
+    $search = \Request::get('search'); 
+     
+
+    $products = Product::where('quantite','>',1)
+    ->where(function($query) use ($search){
+        $query->where('name','like','%'.$search.'%')
+        ->orWhere('code_product','like', '%'.$search.'%')
+        ->orWhere('price','like', '%'.$search.'%')
+        ->orWhere('unite_mesure','like', '%'.$search.'%');
+    })->latest()->paginate(4);
+
+
+    return view('ventes.index', compact('products','search'));
+}
 
     /**
      * Show the form for creating a new resource.

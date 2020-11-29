@@ -29,6 +29,8 @@ Route::resource('stockes', StockeController::class);
 Route::resource('products', ProductController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('categories', CategoryController::class);
+Route::resource('ventes', VenteController::class);
+Route::resource('orders', OrderController::class);
 
 
 //Cart ROUTE
@@ -41,10 +43,14 @@ Route::patch('panier/{rowId}', 'CartController@update')->name('cart.update');
 
 Route::post('update_panier', 'CartController@updatePanier')->name('cart.update_panier');
 
+
+Route::get('journal', 'StockeController@journal')->name('stockes.journal');
+
+
 Route::get('/vider', function(){
 	Cart::destroy();
 });
 
 //Checkout Router PayMent
 
-Route::get('payement','CheckoutController@index')->name('payement');
+Route::post('payement','CheckoutController@store')->name('payement');

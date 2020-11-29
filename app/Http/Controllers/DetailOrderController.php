@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailVente;
+use App\Models\DetailOrder;
 use Illuminate\Http\Request;
 
-class DetailVenteController extends Controller
+class DetailOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DetailVenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DetailVente  $detailVente
+     * @param  \App\Models\DetailOrder  $detailOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(DetailVente $detailVente)
+    public function show(DetailOrder $detailOrder)
     {
         //
     }
@@ -52,10 +52,10 @@ class DetailVenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DetailVente  $detailVente
+     * @param  \App\Models\DetailOrder  $detailOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(DetailVente $detailVente)
+    public function edit(DetailOrder $detailOrder)
     {
         //
     }
@@ -64,10 +64,10 @@ class DetailVenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DetailVente  $detailVente
+     * @param  \App\Models\DetailOrder  $detailOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetailVente $detailVente)
+    public function update(Request $request, DetailOrder $detailOrder)
     {
         //
     }
@@ -75,10 +75,10 @@ class DetailVenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DetailVente  $detailVente
+     * @param  \App\Models\DetailOrder  $detailOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DetailVente $detailVente)
+    public function destroy(DetailOrder $detailOrder)
     {
         //
     }

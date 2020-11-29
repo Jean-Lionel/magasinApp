@@ -48,6 +48,7 @@ class ProductController extends Controller
         'code_product' => 'required',
         'date_expiration' => 'required|date',
         'quantite' => 'numeric|min:0',
+        'category_id' => 'required|numeric|min:0',
 
         ]);
 

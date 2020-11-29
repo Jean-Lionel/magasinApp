@@ -6,7 +6,7 @@
 		<div class="card-body">
 
 			<div class="col-md-12">
-				<h5 class="text-left">Nouveau category</h5>
+				<h5 class="text-left">Nouveau categorie</h5>
 			</div>
 
 			<div class="col-md-12">
@@ -18,6 +18,32 @@
 
 				</div>
 			</div>
+
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="title">STOCKE</label>
+
+					<select name="stock_id" id="" class="form-control {{$errors->has('stock_id') ? 'is-invalid' : 'is-valid' }}">
+						
+						@foreach ($stockes as $element)
+							{{-- expr --}}
+							<option value="">---choisissez le stock</option>
+							<option value="{{ $element->id }}">{{ $element->name }}</option>
+						@endforeach
+					</select>
+
+					{!! $errors->first('stock_id', '<small class="help-block invalid-feedback">:message</small>') !!}
+
+
+
+
+					{{-- <input type="text" class="form-control {{$errors->has('title') ? 'is-invalid' : 'is-valid' }}" id="title" name="title" value="{{ old('title') ?? $category->title?? ' ' }}">
+ --}}
+					
+				</div>
+			</div>
+
 			<div class="col-md-12">
 				<div class="form-group">
 					<label for="description">Description</label>

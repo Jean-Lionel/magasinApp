@@ -104,4 +104,9 @@ class StockeController extends Controller
 
         return back();
     }
+
+
+    public function journal(){
+        dd("je suis cool");
+    }
 }

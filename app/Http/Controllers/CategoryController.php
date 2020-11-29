@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Stocke;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -29,7 +30,9 @@ class CategoryController extends Controller
     {
         //
 
-        return view('categories.create');
+        $stockes = Stocke::all();
+
+        return view('categories.create',compact('stockes'));
     }
 
     /**
@@ -45,7 +48,8 @@ class CategoryController extends Controller
         $request->validate(
 
             [
-                'title' => 'required|unique:categories|max:255'
+                'title' => 'required|unique:categories|max:255',
+                'stock_id' => 'required|numeric|exits:stockes,id'
             ]);
 
         Category::create($request->all());
@@ -73,7 +77,10 @@ class CategoryController extends Controller
     {
         //
 
-        return view('categories.edit',compact('category'));
+
+        $stockes = Stocke::all();
+
+        return view('categories.edit',compact('category','stockes'));
     }
 
     /**

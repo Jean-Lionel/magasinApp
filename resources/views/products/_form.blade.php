@@ -64,7 +64,7 @@
 		
 		<div class="form-group">
 			<label for="category_id">CATEGORIE</label>
-			<select name="category_id" id="" class="form-control">
+			<select name="category_id" id="" class="form-control {{$errors->has('category_id') ? 'is-invalid' : 'is-valid' }}">
 
 				<option value="{{ $product->category_id ??""  }}">
 					

@@ -19,7 +19,7 @@
     <ul class="list-unstyled components mb-5">
 
       <li>
-        <a href="{{ route('clients.index') }}"><span class="fa fa-shopping-cart"></span> Vente</a>
+        <a href="{{ route('ventes.index') }}"><span class="fa fa-shopping-cart"></span> Vente</a>
       </li>
 
       <li class="active">
@@ -32,7 +32,7 @@
         <a href="#"><span class="fa fa-cogs"></span> Services</a>
       </li>
       <li>
-        <a href="#"><span class="fa fa-paper-plane"></span> AUtres</a>
+        <a href="{{ route('stockes.journal') }}"><span class="fa fa-calendar"></span> Journal</a>
       </li> 
 
       <li>
@@ -62,8 +62,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-
-
 
               <a href="{{ route('panier.index') }}" class="btn btn-primary">
                

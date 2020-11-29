@@ -28,6 +28,7 @@
 				<th scope="col">Designation</th>
 				<th scope="col">Prix</th>
 				<th scope="col">Qte</th>
+				<th scope="col">Category</th>
 				<th scope="col">Date d'expiration</th>
 				<th scope="col">Date d'entre</th>
 				<th scope="col">Action</th>
@@ -46,6 +47,8 @@
 
 				<td>{{ $value->price }}</td>
 				<td>{{ $value->quantite }}</td>
+
+				<td><b>{{ $value->category->title }}</b></td>
 				<td>{{ $value->date_expiration }}</td>
 				<td>{{ $value->created_at }}</td>
 				<td class="d-flex justify-content-around">
@@ -54,14 +57,6 @@
 					{{ csrf_field() }}
 					{{ method_field('DELETE') }}
 					<button class="btn btn-outline-danger btn-sm delete_client">Supprimer</button>
-				</form>
-
-				<form action="{{ route('panier.store') }}" method="post">
-					@csrf
-
-					<input type="hidden" name="id" value="{{$value->id}}">
-					
-					<button  type="submit" class="btn btn-sm btn-danger">+</button>
 				</form>
 
 

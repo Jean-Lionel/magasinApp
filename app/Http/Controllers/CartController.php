@@ -47,14 +47,14 @@ class CartController extends Controller
 
    
         if($diplucata->count()){
-            return redirect()->route('products.index')->with('success', 'Existe deja');
+            return redirect()->route('ventes.index')->with('success', 'Le produit existe déjà ');
         }
 
         $product = Product::where('id',$request->id)->firstOrFail();
 
         Cart::add($product->id, $product->name, 1, $product->price)->associate('App\Models\Product');
 
-        return redirect()->route('products.index')->with('success', 'Le produit a ete bien ajoute');
+        return redirect()->route('ventes.index')->with('success', 'Le produit a été bien ajouter');
     }
 
     /**
@@ -83,6 +83,8 @@ class CartController extends Controller
 
 
         $data = $request->all();
+
+    
 
        $validate = Validator::make($data, [
             'qty' => 'required|numeric|between:1,21'

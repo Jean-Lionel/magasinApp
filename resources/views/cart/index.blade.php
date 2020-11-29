@@ -45,7 +45,7 @@
                   <td class="border-0 align-middle">
 
                    <select name="qty" id="qty" class="quantite" data-id="{{ $product->rowId }}" class="custom-select">
-                     @for ($i = 1; $i <=10 ; $i++)
+                     @for ($i = 1; $i <=$product->model->quantite ; $i++)
 
                      {{-- expr --}}
                      <option value="{{ $i }}" {{ ($i == $product->qty) ? 'selected':'' }}>{{ $i }}</option>
@@ -59,11 +59,6 @@
                      @method('DELETE')
                      <button type="submit" ><i class="fa fa-trash"></i></button>
                    </form>
-
-
-
-
-
 
                  </td>
                </tr>
@@ -95,7 +90,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Déscription  </div>
         <div class="p-4">
           <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
           <ul class="list-unstyled mb-4">
@@ -105,7 +100,16 @@
             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
               <h5 class="font-weight-bold">{{ getPrice(Cart::total()) }}</h5>
             </li>
-          </ul><a href="{{ route('payement') }}" class="btn btn-dark rounded-pill py-2 btn-block">Passer à la caisse</a>
+          </ul>
+
+          <form action="{{ route('payement') }}" method="post">
+            @csrf
+
+            @method('post')
+            
+            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block">Passer à la caisse</button>
+          </form>
+
         </div>
       </div>
     </div>
