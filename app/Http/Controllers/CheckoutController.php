@@ -38,14 +38,15 @@ class CheckoutController extends Controller
 
             $order = Order::create([
                 'amount' => Cart::total(),
-                'products'=> serialize(json_encode($this->extractCart()))
+                'tax' => Cart::tax(),
+                'amount_tax' => Cart::subtotal(),
+                'products'=> serialize($this->extractCart())
 
             ]);
 
             $this->storeTodetailOder($order->id);
 
-            Cart::destroy();
-
+             Cart::destroy();
 
             DB::commit();
             
@@ -53,13 +54,14 @@ class CheckoutController extends Controller
 
             DB::rollBack();
 
-            dd($e);
+            Session::flash('error', $e->getMessage());
+
+            return back();
             
         }
 
 
-
-        return back();
+        return view('cart.facture', compact('order'));
 
 
     }
@@ -116,14 +118,15 @@ class CheckoutController extends Controller
 
         $products = [];
         foreach (Cart::content() as $item) {
-            dump($item);
+            // dump($item);
 
             $products[] = [
                 'id' => $item->id,
+                'name' => $item->name,
                 'rowId' => $item->rowId,
                 'price' => $item->price,
                 'quantite' => $item->qty,
-                'tax' => Cart::tax(),
+                
             ];
         }
 

@@ -1,0 +1,60 @@
+   .main-content{
+    width: 50%;
+    left: 50%;
+    right: 50%;
+
+    transform: translate(50%);
+
+    border: 1px solid black;
+    padding: 10px;
+}
+header{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;;
+}
+
+.header-doc{
+    display: flex;
+    justify-content: baseline;
+    padding-top: 20px;
+}
+
+.line{
+    border: 1px solid black;
+}
+
+table{
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, tr , td{
+ border: 1px solid black;
+}
+
+.header-element{
+    display: flex;
+
+    justify-content: space-around;
+}
+
+.header-element a{
+    display: block;
+    text-decoration: none;
+
+}
+
+.header-element button{
+    display: block;
+    cursor: pointer;
+
+}
+
+@media print{
+   .noprint{
+       display:none;
+   }
+}

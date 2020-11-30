@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
             [
                 'title' => 'required|unique:categories|max:255',
-                'stock_id' => 'required|numeric|exits:stockes,id'
+                'stock_id' => 'required|numeric|exists:stockes,id'
             ]);
 
         Category::create($request->all());
