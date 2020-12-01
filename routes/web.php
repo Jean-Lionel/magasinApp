@@ -32,6 +32,11 @@ Route::resource('categories', CategoryController::class);
 Route::resource('ventes', VenteController::class);
 Route::resource('orders', OrderController::class);
 
+Route::get('update_price', 'CartController@update_product_price')->name('update_price');
+
+Route::get('update_quantite', 'CartController@update_quantite')->name('update_quantite');
+Route::get('rapport', 'StockeController@rapport')->name('rapport');
+
 
 //Cart ROUTE
 
@@ -39,7 +44,7 @@ Route::resource('orders', OrderController::class);
 Route::post('panier/ajouter','CartController@store')->name('panier.store');
 Route::get('panier/index','CartController@index')->name('panier.index');
 Route::delete('panier/{id}', 'CartController@destroy')->name('cart.destroy');
-Route::patch('panier/{rowId}', 'CartController@update')->name('cart.update');
+
 
 Route::post('update_panier', 'CartController@updatePanier')->name('cart.update_panier');
 

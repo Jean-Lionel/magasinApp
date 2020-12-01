@@ -10,15 +10,20 @@ class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *'','name','price','date_expiration','quantite','category_id','unite_mesure'
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
-        $products = Product::latest()->paginate(20);
+        $search = \Request::get('search');
+        $products = Product::where('name','like', '%'.$search.'%')
+                            ->orWhere('code_product','like', '%'.$search.'%')
+                            ->orWhere('date_expiration','like', '%'.$search.'%')
+                            ->orWhere('unite_mesure','like', '%'.$search.'%')
 
-        return view("products.index", compact('products'));
+                            ->latest()->paginate(20);
+
+        return view("products.index", compact('products','search'));
     }
 
     /**

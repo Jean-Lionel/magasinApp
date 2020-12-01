@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Stocke;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class StockeController extends Controller
 {
@@ -107,6 +111,33 @@ class StockeController extends Controller
 
 
     public function journal(){
-        dd("je suis cool");
+        $orders =  Order::latest()->paginate(10);
+        $products = Product::latest()->paginate(20);
+
+        return view('journals.index', compact('orders','products'));
+
+
+    }
+
+    public function rapport(){
+
+
+        $date_recherche = \Request::get('date_recherche');
+
+        $venteJournaliere = Order::whereDate('created_at','=',Carbon::now())->sum('amount');
+        $vente_date = Order::whereDate('created_at','=',$date_recherche)->sum('amount');
+        $montant_total = Order::all()->sum('amount');
+
+        $data_history = DB::select("SELECT name, COUNT(`name`) as nombre_vendu , SUM(`quantite`) as quantite FROM `detail_orders` GROUP by name ORDER BY quantite DESC LIMIT 10");
+
+        $data['product_name'] = collect($data_history)->map->name->implode(",");
+        $data['nombre_vendu'] = collect($data_history)->map->nombre_vendu->implode(',');
+        $data['quantite'] = collect($data_history)->map->quantite->implode(',');
+
+        $labels = $data['product_name'];
+
+
+        return view('journals.rapport', 
+            compact('venteJournaliere','date_recherche','labels','vente_date','montant_total', 'data'));
     }
 }

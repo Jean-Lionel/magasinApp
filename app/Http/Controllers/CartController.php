@@ -27,11 +27,17 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    
+    public function update_product_price(){
+        $rowId = \Request::get('product_id');
+        $price = \Request::get('price');
 
+
+        Cart::update($rowId, ['price' => $price]);
+
+
+        return "Je suis cool";
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -45,7 +51,7 @@ class CartController extends Controller
             return $cartItem->id == $request->id;
         });
 
-   
+
         if($diplucata->count()){
             return redirect()->route('ventes.index')->with('success', 'Le produit existe déjà ');
         }
@@ -81,28 +87,24 @@ class CartController extends Controller
 
     public function updatePanier(Request $request){
 
-
         $data = $request->all();
-
-    
-
-       $validate = Validator::make($data, [
-            'qty' => 'required|numeric|between:1,21'
+        $validate = Validator::make($data, [
+            'qty' => 'required|numeric'
 
         ]);
 
-       if($validate->fails()){
-         Session::flash('error', 'Les donneés ne sont pas correctes');
+        if($validate->fails()){
+           Session::flash('error', 'Les donneés ne sont pas correctes');
 
-        return response()->json(['error','error']);
+           return response()->json(['error','error']);
 
        }
 
-        Cart::update($data['rowId'], $data['qty']);
-        Session::flash('success', 'La quatite a été bien mise à jour');
+       Cart::update($data['rowId'], $data['qty']);
+       Session::flash('success', 'La quatite a été bien mise à jour');
 
-        return response()->json(['success','réussi']);
-    }
+       return response()->json(['success','réussi']);
+   }
 
     /**
      * Update the specified resource in storage.
@@ -113,17 +115,21 @@ class CartController extends Controller
      */
     public function update(Request $request, $rowId)
     {
-        //
-
-
-
-        $data = $request->json()->all();
-
-        Cart::update($rowId, $data['qty']);
-        Session::flash('success', 'La quatité mise a jour');
+        
 
         return response()->json(['success','resussi']);
 
+    }
+
+    public function update_quantite(){
+
+        // rowId, 
+        $rowId = \Request::get('rowId');
+        $quatite = \Request::get('qty');
+
+        Cart::update($rowId, $quatite);
+
+        return "Very nice";
     }
 
     /**
@@ -135,7 +141,7 @@ class CartController extends Controller
     public function destroy($rowId)
     {
 
-        
+
 
         Cart::remove($rowId);
 

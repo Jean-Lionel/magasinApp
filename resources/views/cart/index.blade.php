@@ -20,14 +20,23 @@
                   <th scope="col" class="border-0 bg-light">
                     <div class="p-2 px-3 text-uppercase">Product</div>
                   </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Price</div>
+                    <th scope="col" class="border-0 bg-light">
+                     
+                        <div class="p-2 px-3">
+                          PRIX UNITAIRE
+                        </div>
+                       
+                      
+                   
                   </th>
                   <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Quantity</div>
+                    <div class="py-2 text-uppercase">PRIX</div>
                   </th>
                   <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Remove</div>
+                    <div class="py-2 text-uppercase">QUANTITE</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">SUPPRIMMER</div>
                   </th>
                 </tr>
               </thead>
@@ -41,10 +50,20 @@
                   <th scope="row" class="border-0">
                     {{$product->name}}
                   </th>
-                  <td class="border-0 align-middle"><strong>{{ getPrice($product->subtotal()) }}</strong></td>
+
+                  <th>
+                    
+                  <input type="number" class="price_input" data-product="{{ $product->rowId }}" value="{{ $product->price }}" class="form-control">
+                  
+                  </th>
+
+                  <th>
+                    {{ getPrice($product->subtotal())  }}
+                  </th>
+                 
                   <td class="border-0 align-middle">
 
-                   <select name="qty" id="qty" class="quantite" data-id="{{ $product->rowId }}" class="custom-select">
+                   <select name="qty" id="qty" class="quantite quantite_select" data-id="{{ $product->rowId }}" class="custom-select">
                      @for ($i = 1; $i <=$product->model->quantite ; $i++)
 
                      {{-- expr --}}
@@ -73,26 +92,24 @@
 
      <div class="row py-5 p-4 bg-white rounded shadow-sm">
       <div class="col-lg-6">
-        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">INFORMATION DU CLIENT</div>
         <div class="p-4">
-          <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+          <p class="font-italic mb-4">Hello</p>
           <div class="input-group mb-4 border rounded-pill p-2">
             <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
             <div class="input-group-append border-0">
-              <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+              <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Enregistrer</button>
             </div>
           </div>
         </div>
-        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-        <div class="p-4">
-          <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-          <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-        </div>
+        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions pour le client</div>
+        
+
       </div>
       <div class="col-lg-6">
         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Déscription  </div>
         <div class="p-4">
-          <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+
           <ul class="list-unstyled mb-4">
             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous Total </strong><strong>{{getPrice(Cart::subtotal())}}</strong></li>
 
@@ -124,50 +141,98 @@
 @section('javascript')
 
 <script>
-  var selects = document.querySelectorAll("#qty")
 
-  Array.from(selects).forEach( function(element, index) {
+  let price_input = $('.price_input');
+  let quantite_select = $('.quantite_select');
 
-    element.addEventListener('change',function(){
+  price_input.on('blur', function(){
 
-      var rowId = this.getAttribute('data-id');
-      var qty = this.value
+    let product_id = this.getAttribute('data-product');
+    let price = this.value;
 
-      var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax(
+      
+      {
+        url : '{{ route('update_price') }}',
+        method : 'get',
+        data : {product_id , price}
+      }
 
-      $.ajaxSetup({
-        headers: {
+      ).done(function(data){
+        console.log(data)
+      })
+      .catch(function(error){
+        console.log(error)
+      })
 
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  });
 
+
+  quantite_select.on('change',function(){
+    var rowId = this.getAttribute('data-id');
+      var qty = this.value;
+
+      $.ajax({
+        url : "{{ asset('update_quantite') }}",
+        method : 'get',
+        data : {
+          rowId, qty
         }
+        
+      }).done(function(data){
+        console.log(data)
+      }).catch(function(error){
+        console.log(error)
+      })
 
-      });
+  })
 
-        $.ajax({
 
-         type:'POST',
 
-         url:"{{ route('cart.update_panier') }}",
 
-         data:{rowId : rowId, qty :qty },
+  // var selects = document.querySelectorAll("#qty")
 
-         success:function(data){
+  // Array.from(selects).forEach( function(element, index) {
 
-          location.reload();
-          console.log(data)
+  //   element.addEventListener('change',function(){
 
-        },
-        error: function(error){
-          console.log(error)
-        }
-      });
+      
+
+  //     var token = $('meta[name="csrf-token"]').attr('content');
+
+  //     $.ajaxSetup({
+  //       headers: {
+
+  //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+  //       }
+
+  //     });
+
+  //       $.ajax({
+
+  //        type:'POST',
+
+  //        url:"{{ route('cart.update_panier') }}",
+
+  //        data:{rowId : rowId, qty :qty },
+
+  //        success:function(data){
+
+  //         location.reload();
+  //         console.log(data)
+
+  //       },
+  //       error: function(error){
+  //         console.log(error)
+  //       }
+  //     });
 
 
       
-    });
+  //   });
 
-  })
+  // })
 
   </script>
 

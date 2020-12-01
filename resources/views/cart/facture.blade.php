@@ -24,7 +24,7 @@
         <header>
          <div class="header-facture">FACTURE</div>
 
-         <div>N° 337 du 20 /10/2020</div>
+         <div>N° {{ $order->id }} du {{ $order->created_at->format('d-m-Y') }}</div>
 
      </header>
 

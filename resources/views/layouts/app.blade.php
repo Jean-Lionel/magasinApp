@@ -29,7 +29,7 @@
         <a href="{{ route('products.index') }}"><span class="fa fa-sticky-note"></span> Stock</a>
       </li>
       <li>
-        <a href="#"><span class="fa fa-cogs"></span> Services</a>
+        <a href="{{ route('rapport') }}"><span class="fa fa-cogs"></span> Rapport</a>
       </li>
       <li>
         <a href="{{ route('stockes.journal') }}"><span class="fa fa-calendar"></span> Journal</a>
@@ -71,7 +71,7 @@
 
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="{{ route('ventes.index') }}">Vente</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('products.index') }}">Produit</a>
@@ -79,9 +79,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('clients.index') }}">Client</a>
           </li>
-          <li class="nav-item">
+         {{--  <li class="nav-item">
             <a class="nav-link" href="{{ route('stockes.index') }}">Stocke</a>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>
@@ -126,9 +126,11 @@
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('js/popper.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/chart.js.2.9.4_Chart.min.js') }}"></script>
 
 
 <script src="{{ asset('js/main.js') }}"></script>
+
 
 
 @yield('javascript')

@@ -10,12 +10,12 @@
 			<a href="{{ route('products.create') }}" 
 			class="btn btn-primary btn-sm">Ajouter</a>
 			<h4 class="text-center">
-				Liste des products
+				Liste des produits
 			</h4>
 		</div>
 		<div class="col-md-6">
 			<form action="">
-				<input type="search" class="form-control form-control-sm" placeholder="Rechercher ici ">
+				<input type="text" name="search" class="form-control form-control-sm" value="{{ $search }}" placeholder="Rechercher ici ">
 			</form>
 		</div>
 	</div>
