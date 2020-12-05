@@ -21,7 +21,7 @@ class ProductController extends Controller
                             ->orWhere('date_expiration','like', '%'.$search.'%')
                             ->orWhere('unite_mesure','like', '%'.$search.'%')
 
-                            ->latest()->paginate(20);
+                            ->latest()->paginate(5);
 
         return view("products.index", compact('products','search'));
     }

@@ -15,7 +15,7 @@
 
   <div class="wrapper d-flex align-items-stretch">
    <nav id="sidebar" class="active">
-    <h1><a href="" class="logo">M.</a></h1>
+    <h1><a href="" class="logo">Magasin</a></h1>
     <ul class="list-unstyled components mb-5">
 
       <li>
@@ -38,6 +38,13 @@
       <li>
         <a href="{{ route('categories.index') }}"><span class="fa fa-paper-plane"></span> Category</a>
       </li>
+
+      <li>
+        <a href="{{ route('depenses.index') }}"><span class="fa fa-minus"></span> Depense</a>
+      </li>
+     {{--  <li>
+        <a href="{{ route('register') }}"><span class="fa fa-paper-plane"></span> Utilisateur</a>
+      </li> --}}
     </ul>
 
     <div class="footer">
@@ -64,21 +71,33 @@
             <li class="nav-item">
 
               <a href="{{ route('panier.index') }}" class="btn btn-primary">
-               
-                <i class="fa fa-shopping-cart text-lg-center"></i> <span class="badge badge-light">{{ Cart::count()}}</span>
-             
-            </a>
 
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ route('ventes.index') }}">Vente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('products.index') }}">Produit</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('clients.index') }}">Client</a>
-          </li>
+                <i class="fa fa-shopping-cart text-lg-center"></i> <span class="badge badge-light">{{ Cart::count()}}</span>
+
+              </a>
+
+            </li>
+            <li class="nav-item active">
+
+
+              <h4>{{ Auth::user()->name }}</h4>
+
+            </li>
+            <li class="nav-item">
+
+              <form action="{{ route('logout') }}" method="post">
+                @csrf
+                @method('POST')
+                <button type="submit" class="btn btn-dark btn-sm rounded-bottom"> <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Se deconnecter</button>
+              </form>
+
+
+
+
+            </li>
+
+           
+
          {{--  <li class="nav-item">
             <a class="nav-link" href="{{ route('stockes.index') }}">Stocke</a>
           </li> --}}

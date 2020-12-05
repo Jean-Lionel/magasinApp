@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Depense;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Stocke;
@@ -126,15 +127,20 @@ class StockeController extends Controller
 
         $venteJournaliere = Order::whereDate('created_at','=',Carbon::now())->sum('amount');
         $vente_date = Order::whereDate('created_at','=',$date_recherche)->sum('amount');
-        $montant_total = Order::all()->sum('amount');
+        $montant_total = Order::all()->sum('amount') - Depense::all()->sum('montant');
 
         $data_history = DB::select("SELECT name, COUNT(`name`) as nombre_vendu , SUM(`quantite`) as quantite FROM `detail_orders` GROUP by name ORDER BY quantite DESC LIMIT 10");
+
 
         $data['product_name'] = collect($data_history)->map->name->implode(",");
         $data['nombre_vendu'] = collect($data_history)->map->nombre_vendu->implode(',');
         $data['quantite'] = collect($data_history)->map->quantite->implode(',');
 
         $labels = $data['product_name'];
+
+        //$depenses = ;
+
+       // dd($depenses);
 
 
         return view('journals.rapport', 

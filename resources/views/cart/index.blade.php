@@ -111,9 +111,9 @@
         <div class="p-4">
 
           <ul class="list-unstyled mb-4">
-            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous Total </strong><strong>{{getPrice(Cart::subtotal())}}</strong></li>
+            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">PHTVA </strong><strong>{{getPrice(Cart::subtotal())}}</strong></li>
 
-            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>{{ getPrice(Cart::tax()) }}</strong></li>
+            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">TVA</strong><strong>{{ getPrice(Cart::tax()) }}</strong></li>
             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
               <h5 class="font-weight-bold">{{ getPrice(Cart::total()) }}</h5>
             </li>
