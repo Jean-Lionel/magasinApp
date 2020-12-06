@@ -17,10 +17,15 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('code_product');
             $table->string('name');
+            $table->string('marque');
             $table->string('unite_mesure')->nullable();
             $table->float('quantite');
-            $table->float('price');
-            $table->date('date_expiration');
+            $table->float('quantite_alert');
+            $table->double('price',62,2);
+            $table->double('price_max',62,2);
+            $table->double('price_min',62,2);
+            $table->date('date_expiration')->nullable();
+            $table->text('description')->nullable();
 
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
