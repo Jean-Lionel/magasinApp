@@ -63,5 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
 //Checkout Router PayMent
 
 	Route::post('payement','CheckoutController@store')->name('payement');
+	Route::post('add_quantite_stock','ProductController@add_quantite_stock')->name('add_quantite_stock');
+	Route::get('add_view/{product}','ProductController@add_view')->name('add_view');
 
 });

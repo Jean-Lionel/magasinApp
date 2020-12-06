@@ -53,55 +53,7 @@
 				<td>{{ $value->created_at }}</td>
 				<td class="d-flex justify-content-around">
 					<a href="{{ route('products.edit', $value) }}" class="btn btn-outline-info btn-sm mr-2">Modifier</a>
-
-
-
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
-						Ajouter
-					</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Ajouter <b> {{ $value->name }} </b></h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									...
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					{{-- fin Modal --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+					<a href="{{ route('add_view',$value) }}" class="btn btn-info btn-sm mr-2">Ajouter</a>
 
 
 					<a href="{{ route('products.show', $value) }}" class="btn btn-outline-warning btn-sm mr-2">Afficher</a>

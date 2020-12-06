@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\FollowProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -134,6 +136,58 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
+        return $this->index();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function add_view(Product $product){
+
+
+        return view('products.add',compact('product'));
+
+    }
+
+
+    public function add_quantite_stock(Request $request){
+
+        $request->validate([
+            'quantite' => 'required|numeric|min:0'
+
+        ]);
+
+          
+
+        try {
+            DB::beginTransaction();
+              $product = Product::where('id', $request->product_id)->firstOrFail();
+
+              $product->quantite += abs($request->quantite); 
+
+               FollowProduct::create([
+                'quantite' => $request->quantite,
+                'details' => $product->toJson(),
+                'action' => 'ENTRE',
+                'product_id' => $product->id,
+               ]);
+
+               $product->save();
+
+
+            DB::commit();
+            
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            
+        }
 
         return $this->index();
     }
