@@ -20,6 +20,7 @@ class ProductController extends Controller
                             ->orWhere('code_product','like', '%'.$search.'%')
                             ->orWhere('date_expiration','like', '%'.$search.'%')
                             ->orWhere('unite_mesure','like', '%'.$search.'%')
+                            ->orWhere('marque','like', '%'.$search.'%')
 
                             ->latest()->paginate(5);
 
@@ -49,11 +50,15 @@ class ProductController extends Controller
         //
         $request->validate([
         'name' => 'required|max:255',
-        'price' => 'required|min:0',
+        'price' => 'required|numeric|min:0',
+        'price_max' => 'required|max:255',
         'code_product' => 'required',
         'date_expiration' => 'required|date',
+        'category_id' => 'required',
         'quantite' => 'numeric|min:0',
-        'category_id' => 'required|numeric|min:0',
+        'price_min' => 'numeric|min:0',
+        'price_max' => 'numeric|min:0',
+        'quantite_alert' => 'numeric|min:2',
 
         ]);
 
@@ -71,6 +76,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+
+        return view('products.view', compact('product'));
     }
 
     /**
@@ -98,14 +105,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        //'',''
 
          $request->validate([
         'name' => 'required|max:255',
-        'price' => 'required|min:0',
+        'price' => 'required|numeric|min:0',
+        'price_max' => 'required|max:255',
         'code_product' => 'required',
         'date_expiration' => 'required|date',
         'quantite' => 'numeric|min:0',
+        'price_min' => 'numeric|min:0',
+        'price_max' => 'numeric|min:0',
+        'quantite_alert' => 'numeric|min:2',
 
         ]);
 
