@@ -14,6 +14,7 @@
 					<th scope="col">#</th>
 					<th scope="col">PRODUITS</th>
 					<th scope="col">MONTANT</th>
+					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,15 +26,28 @@
 					<th scope="row">{{ $order->id }}</th>
 
 					<td>
-						<ul>
+						<ul class="">
 							@foreach(unserialize($order->products) as $product)
 							<li>{{ $product['name'] }} | Qte : {{ $product['quantite'] }} | 
 							PRIX : {{ getPrice($product['price'] )}}</li>
 							@endforeach
 
+							<li class="text-center list-unstyled">{{ $order->created_at }}</li>
+
 						</ul>
 					</td>
 					<td>{{ getPrice($order->amount )}}</td>
+					<td class="d-flex">
+						<a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-success mr-2" title="imprimer"> <i class="fa fa-print" ></i></a> 
+						
+
+						<form action="{{ route('orders.destroy', $order) }}" method="post">
+							@method("DELETE")
+							@csrf
+							<button type="submit" onclick="return confirm('êtez-vous sûr ?')" class="btn btn-danger btn-sm" title="Supprimer"> <i class="fa fa-minus" ></i> </button>
+							
+						</form>
+					</td>
 					
 				</tr>
 

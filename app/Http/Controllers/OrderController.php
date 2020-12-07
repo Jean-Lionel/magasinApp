@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -55,7 +57,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+      //  dd($order);
+
+
+        return view('cart.facture',compact('order'));
     }
 
     /**
@@ -89,6 +94,27 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+
+        try {
+            DB::beginTransaction();
+            foreach ($order->details as $value) {
+                $value->product->quantite += $value->quantite ;
+                $value->product->save();
+                $value->delete();
+            }
+            //$order->details->delete();
+
+            $order->delete();
+
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e);
+            Session::flash('error', "Une erreur s'est produite");
+        }
+
+
+        return back();
     }
 }

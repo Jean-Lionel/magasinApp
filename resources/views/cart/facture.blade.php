@@ -65,8 +65,9 @@
 
     <section>
         <h5> Le Client : </h5>
-        Nom et Prénom ou Raison sociale * :  <br>
+        Nom et Prénom ou Raison sociale * : {{  collect(json_decode($order->client))->get('name') ?? "" }} <br>
 
+        TEL : {{  collect(json_decode($order->client))->get('telephone') ?? "" }}  <br>
         NIF : ............  <br>
         Résident à : ........... <br>
 
@@ -80,6 +81,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nature de l'articel ou service *</th>
                     <th>Qté *</th>
                     <th> PU*</th>
@@ -94,11 +96,12 @@
 
 
 
-                @foreach(unserialize($order->products) as $product)
+                @foreach(unserialize($order->products) as $key=> $product)
 
                 <tr>
+                    <td>{{ $key +1 }}</td>
 
-                    <td>1. {{ $product['name'] }}</td>
+                    <td> {{ $product['name'] }}</td>
                     <td> {{ $product['quantite'] }}</td>
                     <td> {{ getPrice($product['price'] ) }}</td>
                     <td> {{ getPrice( $product['price'] * $product['quantite'])  }}</td>

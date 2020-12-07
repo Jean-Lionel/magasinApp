@@ -18,9 +18,12 @@ class DetailOrder extends Model
     public static function boot(){
     	parent::boot();
 
-
     	self::creating(function($model){
     		$model->user_id = Auth::user()->id ?? 0;
     	});
+    }
+
+    public function product(){
+    	return $this->belongsTo('App\Models\Product', 'product_id');
     }
 }

@@ -20,7 +20,7 @@
 						<label for="quantite">QUANTITE</label>
 					</div>
 					<div class="col-md-3">
-						<input name="quantite" class="form-control form-control-sm" type="number" value="{{ old('quantite') }}"  placeholder="Exemple : 4">
+						<input required="" name="quantite" class="form-control form-control-sm" type="number" value="{{ old('quantite') }}"  placeholder="Exemple : 4">
 						{!! $errors->first('quantite', '<small class="help-block invalid-feedback">:message</small>') !!}
 					</div>
 					<div class="col-md-3 d-flex">

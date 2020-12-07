@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
 
     protected $fillable = ['amount',
-'products','user_id','tax','amount_tax'];
+'products','user_id','tax','amount_tax','client'];
 
 
 	public static function boot(){
@@ -25,5 +27,21 @@ class Order extends Model
 
 			// dd($model);
 		});
+
+		// self::deleting(function($model){
+
+		// 	$model->details->delete();
+		// });
+
+
 	}
+
+	public function details(){
+		return $this->hasMany('App\Models\DetailOrder','order_id');
+	}
+
+	// public function client()
+	// {
+	// 	return $this->belongsTo('App\Model\Client','');
+	// }
 }

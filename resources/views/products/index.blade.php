@@ -28,6 +28,7 @@
 				<th scope="col">Designation</th>
 				<th scope="col">Prix</th>
 				<th scope="col">Qte</th>
+				<th scope="col">Alert</th>
 				<th scope="col">Category</th>
 				<th scope="col">Date d'expiration</th>
 				<th scope="col">Date d'entre</th>
@@ -46,7 +47,18 @@
 				</td>
 
 				<td>{{ $value->price }}</td>
-				<td>{{ $value->quantite }}</td>
+				<td class="{{ $value->quantite >= $value->quantite_alert ? 'bg-success' : 'bg-danger'  }}">
+
+					{{ $value->quantite }}
+
+				</td>
+
+				<td>
+					@if ($value->quantite <= $value->quantite_alert)
+					{{-- expr --}}
+					<i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i> 
+				    @endif
+			   </td>
 
 				<td><b>{{ $value->category->title }}</b></td>
 				<td>{{ $value->date_expiration }}</td>
@@ -76,7 +88,7 @@
 
 
 
-	
+
 </div>
 
 <div class="col-md-12" style="height: 20px; overflow: hidden;">

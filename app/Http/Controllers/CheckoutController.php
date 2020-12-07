@@ -3,22 +3,35 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Client;
 use App\Models\DetailOrder;
 use App\Models\Order;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 
 class CheckoutController extends Controller
 {
 
-
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
+     
 
+        $request->validate([
+            'name' => 'required|min:1'
+
+        ]);
+
+       
 
         if (Cart::count() <= 0) {
             Session::flash('error', 'Votre panier est vide.');
@@ -36,11 +49,19 @@ class CheckoutController extends Controller
 
             $this->stockUpdated();
 
+            $client =  Client::create([
+                'name' => $request->name,
+                'telephone' => $request->telephone ?? "0000",
+                'description' => $request->description ?? ""
+
+            ]);
+
             $order = Order::create([
                 'amount' => Cart::total(),
                 'tax' => Cart::tax(),
                 'amount_tax' => Cart::subtotal(),
-                'products'=> serialize($this->extractCart())
+                'products'=> serialize($this->extractCart()),
+                'client'=> $client->toJson(),
 
             ]);
 
