@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+	return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
+
+
 
 Route::group(['middleware' => ['auth']], function () {
     //
 	Route::get('/', 'VenteController@index');
 
 
-	Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-		return Inertia\Inertia::render('Dashboard');
-	})->name('dashboard');
 
 
 
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('ventes', VenteController::class);
 	Route::resource('orders', OrderController::class);
 	Route::resource('depenses', DepenseController::class);
+	Route::resource('users', UserController::class);
 	
 	Route::get('update_price', 'CartController@update_product_price')->name('update_price');
 
