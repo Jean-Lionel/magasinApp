@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\DetailOrder;
+use App\Models\FollowProduct;
 use App\Models\Order;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -130,6 +131,14 @@ class CheckoutController extends Controller
                 'order_id' => $order_id,
 
             ]);
+
+
+            FollowProduct::create([
+                'quantite' => $item->qty,
+                'details' => $item->model->toJson(),
+                'action' => 'VENTE',
+                'product_id' => $item->model->id,
+               ]);
             
         }
     }
@@ -149,6 +158,8 @@ class CheckoutController extends Controller
                 'quantite' => $item->qty,
                 
             ];
+
+          
         }
 
         return $products;

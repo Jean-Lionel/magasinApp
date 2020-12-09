@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -86,7 +87,9 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
-        return view('users.edit', compact('user'));
+
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -104,9 +107,12 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        if($request->has('password')){
+        if(!empty($request->password)){
             $user->password = Hash::make($request->password);
         }
+
+        $user->roles()->sync($request->roles);
+
 
         $user->save();
 

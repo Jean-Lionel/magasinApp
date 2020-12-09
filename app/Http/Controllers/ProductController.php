@@ -7,6 +7,7 @@ use App\Models\FollowProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -17,6 +18,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+
+        // dd(Gate::allows('is-admin'));
+
+        $this->authorize('is-admin');
+
+
         $search = \Request::get('search');
         $products = Product::where('name','like', '%'.$search.'%')
                             ->orWhere('code_product','like', '%'.$search.'%')
@@ -162,8 +169,6 @@ class ProductController extends Controller
             'quantite' => 'required|numeric|min:0'
 
         ]);
-
-          
 
         try {
             DB::beginTransaction();

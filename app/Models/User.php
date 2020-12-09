@@ -57,4 +57,30 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+
+    public function isAdmin(){
+
+        return $this->roles()->where('name','ADMINISTRATEUR')->first();
+    }
+
+    public function isControleur(){
+        return $this->roles()->where('name', 'CONTROLLEUR')->first();
+    }
+
+    public function isComptable(){
+        return $this->roles()->where('name', 'COMPTABLE')->first();
+    }
+
+    public function isVente(){
+        return $this->roles()->where('name', 'VENTE')->first();
+    }
+
+
+
 }

@@ -26,6 +26,7 @@
 				<th scope="col">#</th>
 				<th scope="col">NOM</th>
 				<th scope="col">E-MAIL</th>
+				<th scope="col">Roles</th>
 
 				<th scope="col">Action</th>
 			</tr>
@@ -37,6 +38,19 @@
 				<td>{{ '1' }}</td>
 				<td>{{ $user->name }}</td>
 				<td>{{ $user->email }}</td>
+				<td>
+
+					<ul class="">
+					
+						@foreach($user->roles as $role)
+						<li class="">{{ $role->name }}</li>
+						@endforeach
+
+					</ul>
+					
+
+
+				</td>
 				<td class="d-flex">
 					<a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>
 
