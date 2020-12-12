@@ -16,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Product::class => ProductPolicy::class,
     ];
 
     /**
@@ -47,6 +48,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('is-controleur', function($user){
             return $user->isControleur();
-        })
+        });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\FollowProduct;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -16,13 +17,20 @@ class ProductController extends Controller
      *'','name','price','date_expiration','quantite','category_id','unite_mesure'
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        //$this->authorize('is-admin');
+
+
+
+       // dd(Gate::allows('is-vente'));
+    }
     public function index()
     {
 
         // dd(Gate::allows('is-admin'));
 
-        $this->authorize('is-admin');
-
+        $this->authorize('view', Product::class);
 
         $search = \Request::get('search');
         $products = Product::where('name','like', '%'.$search.'%')
@@ -115,6 +123,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //'',''
+
+
+       // $this->authorize('update', $product);
 
          $request->validate([
         'name' => 'required|max:255',

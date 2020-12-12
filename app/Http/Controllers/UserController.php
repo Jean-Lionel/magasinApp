@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -15,10 +17,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+            $this->authorize('is-admin');
+
+            return $next($request);
+        });
+        
+    }
     public function index()
     {
         //
-
         $search = \Request::get('search');
 
         $users = User::paginate(10);

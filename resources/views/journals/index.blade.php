@@ -8,7 +8,7 @@
 	
 	<div class="col-md-6">
 		<h5 class="text-center">Historique des ventes</h5>
-		<table class="table table-sm table-info">
+		<table class="table table-sm table-dark">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
@@ -59,9 +59,9 @@
 
 	</div>
 	<div class="col-md-6">
-		<h5 class="text-center">Historique des entres</h5>
+		<h5 class="text-center">Historique des entrées</h5>
 
-		<table class="table table-sm table-secondary">
+		<table class="table table-sm table-striped">
 			<thead>
 				<tr>
 					<th scope="col">#</th>

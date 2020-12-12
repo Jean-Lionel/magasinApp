@@ -18,16 +18,23 @@
     <h1><a href="" class="logo">Magasin</a></h1>
     <ul class="list-unstyled components mb-5">
 
+      @can('is-vente')
+
       <li>
         <a href="{{ route('ventes.index') }}"><span class="fa fa-shopping-cart"></span> Vente</a>
       </li>
 
+      @endcan
+
       <li class="active">
         <a href="{{ route('products.create') }}"><span class="fa fa-product-hunt"></span> Entre</a>
       </li>
+
+      @can('is-admin')
       <li>
         <a href="{{ route('products.index') }}"><span class="fa fa-sticky-note"></span> Stock</a>
       </li>
+
       <li>
         <a href="{{ route('rapport') }}"><span class="fa fa-cogs"></span> Rapport</a>
       </li>
@@ -50,6 +57,8 @@
         <a href="{{ route('register') }}"><span class="fa fa-paper-plane"></span> Utilisateur</a>
       </li> --}}
     </ul>
+
+    @endcan
 
     <div class="footer">
 
