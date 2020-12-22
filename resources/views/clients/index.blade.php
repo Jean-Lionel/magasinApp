@@ -25,9 +25,9 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">NOM</th>
-				<th scope="col">PRENOM</th>
+
 				<th scope="col">TELEPHONE</th>
-				<th scope="col">ADDRESSE</th>
+			
 				<th scope="col">Action</th>
 			</tr>
 		</thead>
@@ -42,11 +42,11 @@ description  --}}
 			<tr>
 				<td>{{ $value->id }}</td>
 				<td>
-					{{ $value->first_name}}
+					{{ $value->name}}
 				</td>
-				<td>{{ $value->last_name }}</td>
+		
 				<td>{{ $value->telephone }}</td>
-				<td>{{ $value->addresse }}</td>
+
 				<td>{{ $value->created_at }}</td>
 				<td class="d-flex justify-content-around">
 					<a href="{{ route('clients.edit', $value) }}" class="btn btn-outline-info btn-sm mr-2">Modifier</a>

@@ -8,7 +8,7 @@
 
 		<div class="col-md-6 d-flex justify-content-between">
 			<a href="{{ route('stockes.create') }}" 
-			class="btn btn-primary btn-sm">Ajouter</a>
+			class="btn btn-primary btn-sm">bon d'entre en stock</a>
 			<h4 class="text-center">
 				Liste des stockes
 			</h4>

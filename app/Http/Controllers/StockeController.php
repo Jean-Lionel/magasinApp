@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Depense;
+use App\Models\FollowProduct;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Stocke;
@@ -146,4 +147,21 @@ class StockeController extends Controller
         return view('journals.rapport', 
             compact('venteJournaliere','date_recherche','labels','vente_date','montant_total', 'data'));
     }
+
+
+
+    public function bonEntre(){
+
+        $s_date = \Request::get('s_date');
+        $e_date = \Request::get('e_date');
+        $action = \Request::get('action');
+
+        $d = new Carbon($e_date);
+        $products = FollowProduct::where('action','=',$action)
+                                    ->whereBetween('created_at',[$s_date,  $d->addDays(1)])->get();
+
+        return view('products.bon_entre', compact('s_date', 'e_date','products','action'));
+    }
+
+
 }

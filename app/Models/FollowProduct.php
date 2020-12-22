@@ -26,6 +26,6 @@ class FollowProduct extends Model
     }
 
     public function products(){
-    	return $this->belongsTo('App\Models\Product');
+    	return $this->belongsTo('App\Models\Product','product_id');
     }
 }

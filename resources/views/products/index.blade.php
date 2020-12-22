@@ -7,8 +7,8 @@
 
 
 		<div class="col-md-6 d-flex justify-content-between">
-			<a href="{{ route('products.create') }}" 
-			class="btn btn-primary btn-sm">Ajouter</a>
+			<a href="{{ route('bon_entre') }}" 
+			class="btn btn-primary btn-sm">Les entres et les sorties</a>
 			<h4 class="text-center">
 				Liste des produits
 			</h4>
@@ -83,9 +83,6 @@
 
 		</tbody>
 	</table>
-
-
-
 
 
 

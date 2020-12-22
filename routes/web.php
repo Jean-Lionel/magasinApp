@@ -23,10 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function () {
     //
 	Route::get('/', 'VenteController@index');
-
-
-
-
+	
 
 	Route::get('product/create', 'ProductController@create')->name('product.create');
 
@@ -68,5 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('payement','CheckoutController@store')->name('payement');
 	Route::post('add_quantite_stock','ProductController@add_quantite_stock')->name('add_quantite_stock');
 	Route::get('add_view/{product}','ProductController@add_view')->name('add_view');
+
+
+	Route::get('bon_entre', 'StockeController@bonEntre')->name('bon_entre');
 
 });

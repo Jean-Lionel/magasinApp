@@ -31,7 +31,7 @@ public function index()
         ->orWhere('code_product','like', '%'.$search.'%')
         ->orWhere('price','like', '%'.$search.'%')
         ->orWhere('unite_mesure','like', '%'.$search.'%');
-    })->latest()->paginate(4);
+    })->latest()->paginate(6);
 
 
     return view('ventes.index', compact('products','search'));

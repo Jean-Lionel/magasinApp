@@ -31,7 +31,7 @@
      <main>
         <h5>A. Indentification du vendeur</h5>
 
-        <span>Nom et Prénom ou Raison Social :</span> <span>Jean Lionel</span>
+        <span>Nom et Prénom ou Raison Social :<b> NDIKUMANA JACQUELINE </b></span>
 
 
         <div class="header-doc">
@@ -40,12 +40,12 @@
                 NIF : 4001 272899 <br>
                 Registre de commerce N° : 2020202
                 <br>
-                B.P : .......... Tél: ........ <br>
+                B.P : ..... Tél: 79 903 600 <br>
                 Commune : ......... Quartier: ........
 
                 Av: ....... Rue: .... N°: ...... <br>
 
-                Assujeti à la TVA : OUI 🚒 NON 🚳  
+                Assujeti à la TVA : OUI ... NON ...  
             </div>
 
             <div class="line"></div>
@@ -54,7 +54,7 @@
                 Centre Fiscale : ....... <br>
                 Secteur d'activité : .... 
                 <br>
-                Frome jurdique : ....
+                Forme jurdique : ....
             </div>
 
             
