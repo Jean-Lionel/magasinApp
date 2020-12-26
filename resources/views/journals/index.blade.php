@@ -8,12 +8,31 @@
 	
 	<div class="col-md-6">
 		<h5 class="text-center">Historique des ventes</h5>
-		<table class="table table-sm table-dark">
-			<thead>
+		<div>
+			<form action="" class="form-group row">
+				<div class="col-sm-6">
+					<label for="">TYPE DE PAIMENENT</label>
+					
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" name="type_paiement" id="">
+						<option value="DETTE">DETTE</option>
+						<option value="EN CACHE">EN CACHE</option>
+					</select>
+					
+				</div>
+				
+			</form>
+		</div>
+		<table class="table table-sm ">
+			<thead class="table-dark">
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">PRODUITS</th>
-					<th scope="col">MONTANT</th>
+					<th scope="col">@sortablelink('montant','MONTANT')</th>
+					<th scope="col">
+						@sortablelink('type_paiement', 'MODE DE PAIMENT')
+					</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
@@ -37,6 +56,7 @@
 						</ul>
 					</td>
 					<td>{{ getPrice($order->amount )}}</td>
+					<td>{{ $order->type_paiement ?? ""}}</td>
 					<td class="d-flex">
 						<a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-success mr-2" title="imprimer"> <i class="fa fa-print" ></i></a> 
 						
@@ -44,7 +64,7 @@
 						<form action="{{ route('orders.destroy', $order) }}" method="post">
 							@method("DELETE")
 							@csrf
-							<button type="submit" onclick="return confirm('êtez-vous sûr ?')" class="btn btn-danger btn-sm" title="Supprimer"> <i class="fa fa-minus" ></i> </button>
+							<button type="submit" onclick="return confirm('êtez-vous sûr d\'annuler la facture?')" class="btn btn-danger btn-sm" title="Supprimer"> <i class="fa fa-minus" ></i> </button>
 							
 						</form>
 					</td>
@@ -73,7 +93,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			
+
 
 				@foreach($products as $product)
 				<tr>
@@ -86,7 +106,7 @@
 				</tr>
 
 				@endforeach
-		
+
 			</tbody>
 		</table>
 		

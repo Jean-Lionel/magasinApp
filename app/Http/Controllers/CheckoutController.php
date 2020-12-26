@@ -28,11 +28,10 @@ class CheckoutController extends Controller
      
 
         $request->validate([
-            'name' => 'required|min:1'
+            'name' => 'required|min:1',
+            'type_paiement' => 'required'
 
         ]);
-
-       
 
         if (Cart::count() <= 0) {
             Session::flash('error', 'Votre panier est vide.');
@@ -60,6 +59,7 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'amount' => Cart::total(),
                 'tax' => Cart::tax(),
+                'type_paiement' => $request->type_paiement,
                 'amount_tax' => Cart::subtotal(),
                 'products'=> serialize($this->extractCart()),
                 'client'=> $client->toJson(),

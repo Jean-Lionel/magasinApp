@@ -81,6 +81,11 @@ class User extends Authenticatable
         return $this->roles()->where('name', 'VENTE')->first();
     }
 
+    public function isEntreProduit(){
+        return $this->roles()->where('name', 'ENTRE DES PRODUITS EN STOCK')->first();
+    }
+
+
 
 
 }

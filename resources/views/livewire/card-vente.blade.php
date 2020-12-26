@@ -1,13 +1,8 @@
-@extends('layouts.app')
+<div>
+    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 
-@section('content')
-
-<div class="px-4 px-lg-0">
-  <!-- For demo purpose -->
-
-  <!-- End -->
-
-  <div class="pb-5">
+    PRICE EST {{ $price }}
+    <div class="pb-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
@@ -46,7 +41,7 @@
               <tbody>
 
 
-                @foreach (Cart::content() as $product)
+                @foreach ($products as $product)
                 {{-- expr --}}
 
                 <tr>
@@ -61,12 +56,12 @@
 
                   <th>
 
-                    <input type="number" class="price_input" data-product="{{ $product->rowId }}" value="{{ $product->price }}" class="form-control">
+                    <input type="number" wire:keydown="changePrice({{ $product->rowId  }})" class="price_input"  value="{{ $product->price }}" class="form-control">
 
                   </th>
 
                   <th>
-                    <span id="{{ $product->rowId }}">{{ getPrice($product->subtotal())  }}</span>
+                    {{ getPrice($product->subtotal())  }}
                   </th>
 
                   <td class="border-0 align-middle">
@@ -103,10 +98,6 @@
         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">INFORMATION DU CLIENT</div>
         <div class="p-1">
 
-
-
-
-
          <form action="{{ route('payement') }}" method="post">
           @csrf
 
@@ -137,13 +128,6 @@
        </form>
 
 
-
-
-
-
-
-
-
         {{--  <div class="input-group mb-4 border rounded-pill p-2">
           <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
           <div class="input-group-append border-0">
@@ -160,18 +144,11 @@
       <div class="p-4">
 
         <ul class="list-unstyled mb-4">
-          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">PHTVA </strong>
-
-            <strong id="prix_hors_tva">{{getPrice(Cart::subtotal())}}</strong>
-          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">PHTVA </strong><strong>{{getPrice(Cart::subtotal())}}</strong></li>
 
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">TVA</strong><strong>{{ getPrice(Cart::tax()) }}</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-            <h5 class="font-weight-bold">
-
-              <span id="total_montant">{{ getPrice(Cart::total()) }}</spna>
-
-            </h5>
+            <h5 class="font-weight-bold">{{ getPrice(Cart::total()) }}</h5>
           </li>
         </ul>
 
@@ -180,120 +157,4 @@
       </div>
     </div>
   </div>
-
 </div>
-</div>
-</div>
-
-@stop
-
-
-@section('javascript')
-
-<script>
-
-  let price_input = $('.price_input');
-  let quantite_select = $('.quantite_select');
-
-  price_input.on('blur', function(){
-
-    let product_id = this.getAttribute('data-product');
-    let price = this.value;
-
-    $.ajax(
-
-    {
-      url : '{{ route('update_price') }}',
-      method : 'get',
-      data : {product_id , price}
-    }
-
-    ).done(function(data){
-
-      $("#"+data.rowId).html(data.cart)
-
-      $("#prix_hors_tva").html(data.prix_hors_tva);
-      $("#total_montant").html(data.total_montant);
-      console.log(data)
-    })
-    .catch(function(error){
-      console.log(error)
-    })
-
-  });
-
-
-  quantite_select.on('change',function(){
-    var rowId = this.getAttribute('data-id');
-    var qty = this.value;
-
-    $.ajax({
-      url : "{{ asset('update_quantite') }}",
-      method : 'get',
-      data : {
-        rowId, qty
-      }
-
-    }).done(function(data){
-      $("#"+data.rowId).html(data.cart)
-
-      $("#prix_hors_tva").html(data.prix_hors_tva);
-      $("#total_montant").html(data.total_montant);
-
-      console.log(data)
-    }).catch(function(error){
-      console.log(error)
-    })
-
-  })
-
-
-
-
-  // var selects = document.querySelectorAll("#qty")
-
-  // Array.from(selects).forEach( function(element, index) {
-
-  //   element.addEventListener('change',function(){
-
-
-
-  //     var token = $('meta[name="csrf-token"]').attr('content');
-
-  //     $.ajaxSetup({
-  //       headers: {
-
-  //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-  //       }
-
-  //     });
-
-  //       $.ajax({
-
-  //        type:'POST',
-
-  //        url:"{{ route('cart.update_panier') }}",
-
-  //        data:{rowId : rowId, qty :qty },
-
-  //        success:function(data){
-
-  //         location.reload();
-  //         console.log(data)
-
-  //       },
-  //       error: function(error){
-  //         console.log(error)
-  //       }
-  //     });
-
-
-
-  //   });
-
-  // })
-
-</script>
-
-@endsection

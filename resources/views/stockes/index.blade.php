@@ -26,6 +26,7 @@
 				<th scope="col">#</th>
 				<th scope="col">Designation</th>
 				<th scope="col">Description</th>
+				
 				<th scope="col">Date de creation</th>
 				<th scope="col">Action</th>
 			</tr>

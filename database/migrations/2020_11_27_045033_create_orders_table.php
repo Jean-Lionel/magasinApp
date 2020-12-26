@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->double('amount',60,2);
             $table->double('tax',60,2);
             $table->double('amount_tax',60,2);
+            $table->string('type_paiement');
             $table->text('products');
             $table->text('client')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();

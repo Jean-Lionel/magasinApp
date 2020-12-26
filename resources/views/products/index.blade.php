@@ -25,12 +25,14 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">CODE</th>
-				<th scope="col">Designation</th>
-				<th scope="col">Prix</th>
-				<th scope="col">Qte</th>
-				<th scope="col">Alert</th>
+				<th scope="col"> @sortablelink('name','Designation') </th>
+				<th scope="col">@sortablelink('price','Prix')  </th>
+				<th scope="col">@sortablelink('quantite','Qté')</th>
+				<th scope="col">@sortablelink('quantite_alert','Alert')</th>
+				
 				<th scope="col">Category</th>
 				<th scope="col">Date d'expiration</th>
+				
 				<th scope="col">Date d'entre</th>
 				<th scope="col">Action</th>
 			</tr>
@@ -72,7 +74,7 @@
 					<form class="form-delete" action="{{ route('products.destroy' , $value) }}" style="display: inline;" method="POST">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}
-						<button class="btn btn-outline-danger btn-sm delete_client">Supprimer</button>
+						<button class="btn btn-outline-danger btn-sm delete_client" onclick="return confirm('Voulez-vous supprimer ?')">Supprimer</button>
 					</form>
 
 

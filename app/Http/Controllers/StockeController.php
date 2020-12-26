@@ -113,7 +113,7 @@ class StockeController extends Controller
 
 
     public function journal(){
-        $orders =  Order::latest()->paginate(10);
+        $orders =  Order::sortable()->latest()->paginate(10);
         $products = Product::latest()->paginate(20);
 
         return view('journals.index', compact('orders','products'));
@@ -127,7 +127,9 @@ class StockeController extends Controller
         $date_recherche = \Request::get('date_recherche');
 
         $venteJournaliere = Order::whereDate('created_at','=',Carbon::now())->sum('amount');
-        $vente_date = Order::whereDate('created_at','=',$date_recherche)->sum('amount');
+        $vente_date = Order::whereDate('created_at','=',$date_recherche)
+                            ->where('type_paiement','=','CACHE')
+                            ->sum('amount');
         $montant_total = Order::all()->sum('amount') - Depense::all()->sum('montant');
 
         $data_history = DB::select("SELECT name, COUNT(`name`) as nombre_vendu , SUM(`quantite`) as quantite FROM `detail_orders` GROUP by name ORDER BY quantite DESC LIMIT 10");
@@ -158,7 +160,7 @@ class StockeController extends Controller
 
         $d = new Carbon($e_date);
         $products = FollowProduct::where('action','=',$action)
-                                    ->whereBetween('created_at',[$s_date,  $d->addDays(1)])->get();
+                                    ->whereBetween('created_at',[$s_date,  $d->addDays(1)])->paginate();
 
         return view('products.bon_entre', compact('s_date', 'e_date','products','action'));
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,11 +33,23 @@ class CartController extends Controller
         $rowId = \Request::get('product_id');
         $price = \Request::get('price');
 
+        $total = Cart::subtotal();
 
-        Cart::update($rowId, ['price' => $price]);
+        $cart = Cart::update($rowId, ['price' => $price]);
 
 
-        return "Je suis cool";
+
+        return response()->json( [
+            'rowId' =>  $cart->rowId,
+            'cart' => $cart->subtotal,
+            'prix_hors_tva' => $total ,
+             'total_montant' => getPrice(Cart::total()) 
+
+        ]);
+       
+
+
+        //return  Cart::update($rowId, ['price' => $price]);
     }
     /**
      * Store a newly created resource in storage.
@@ -127,9 +140,21 @@ class CartController extends Controller
         $rowId = \Request::get('rowId');
         $quatite = \Request::get('qty');
 
-        Cart::update($rowId, $quatite);
+        $cart = Cart::update($rowId, $quatite);
 
-        return "Very nice";
+        // 'rowId' =>  $cart->rowId,
+        //     'cart' => $cart->subtotal,
+        //     'prix_hors_tva' => $total 
+
+     
+
+        return response()->json( [
+            'rowId' => $cart->rowId,
+            'cart' => $cart->subtotal(),
+            'prix_hors_tva' => getPrice(Cart::subtotal()),
+            'total_montant' => getPrice(Cart::total()) 
+
+        ]);
     }
 
     /**

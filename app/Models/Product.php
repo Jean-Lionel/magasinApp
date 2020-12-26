@@ -5,10 +5,14 @@ namespace App\Models;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends MyModel
 {
     use HasFactory;
+    use SoftDeletes;
+    use Sortable;
 
 //     code_product
 // name
@@ -25,6 +29,8 @@ class Product extends MyModel
 
 
     protected $fillable = ['code_product','name','price','date_expiration','quantite','quantite_alert','category_id','unite_mesure','price_min','price_max','description','marque'];
+
+    protected $sortable= ['code_product','name','price','date_expiration','quantite','quantite_alert','category_id','unite_mesure','price_min','price_max','description','marque'];
     
     public function category()
     {

@@ -181,6 +181,7 @@ return [
         //USER ROLES AND PERMISION MANAGER
 
         Spatie\Permission\PermissionServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
 
     ],
 

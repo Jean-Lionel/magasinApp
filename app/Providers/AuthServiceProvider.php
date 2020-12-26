@@ -49,5 +49,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('is-controleur', function($user){
             return $user->isControleur();
         });
+
+         Gate::define('is-entre-stock', function($user){
+            return $user->isEntreProduit();
+        });
     }
 }

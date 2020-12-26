@@ -50,26 +50,36 @@
 						<th colspan="3">Stock Final</th>
 					</tr>
 					<tr>
-						<th>Qté</th>
-						<th>Prix</th>
-						<th>Montant</th>
-						<th>Qté</th>
-						<th>Prix</th>
-						<th>Montant</th>
+						@if($action === 'ENTRE')
+							<th colspan="2">Qté Entre</th>
+						@else
+							<th colspan="2">Qté Vendue</th>
+						@endif
+						
+						<th>Qté Initial</th>
+						
 					</tr>
 				</thead>
 
 				<tbody>
 
 					@foreach($products as $val)
+					@php
+						$product = json_decode($val->details, true)
+					@endphp
 
-						@foreach($val->products as $product)
-						<tr>
-							<td>{{ $val->created_at }}</td>
-							<td>{{ $val->products->name }}</td>
-						</tr>
+					<tr>
+						<td>{{ $val->created_at }}</td>
+						<td>{{ $product['name'] }}</td>
+						<td colspan="2">{{ $val->quantite ?? ""}}</td>
+						<td>{{ $product['quantite'] }}</td>
 
-						@endforeach
+						@if($action === 'ENTRE')
+						<td>{{ $product['quantite'] + $val->quantite }}</td>
+						@else
+						<td>{{ abs($product['quantite'] - $val->quantite) }}</td>
+						@endif
+					</tr>
 					@endforeach
 				</tbody>
 			</table>

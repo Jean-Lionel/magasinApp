@@ -9,7 +9,9 @@
  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   @livewireStyles
  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 <body>
 
@@ -80,6 +82,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+           <h5>{{ Auth::user()->name }}</h5>
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
 
@@ -90,12 +94,7 @@
               </a>
 
             </li>
-            <li class="nav-item active">
-
-
-              <h4>{{ Auth::user()->name }}</h4>
-
-            </li>
+          
             <li class="nav-item">
 
               <form action="{{ route('logout') }}" method="post">
@@ -162,6 +161,8 @@
 
 
 <script src="{{ asset('js/main.js') }}"></script>
+
+ @livewireScripts
 
 
 

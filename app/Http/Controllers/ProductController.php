@@ -33,13 +33,13 @@ class ProductController extends Controller
         $this->authorize('view', Product::class);
 
         $search = \Request::get('search');
-        $products = Product::where('name','like', '%'.$search.'%')
+        $products = Product::sortable()->where('name','like', '%'.$search.'%')
                             ->orWhere('code_product','like', '%'.$search.'%')
                             ->orWhere('date_expiration','like', '%'.$search.'%')
                             ->orWhere('unite_mesure','like', '%'.$search.'%')
                             ->orWhere('marque','like', '%'.$search.'%')
 
-                            ->latest()->paginate(5);
+                            ->latest()->paginate(10);
 
         return view("products.index", compact('products','search'));
     }
