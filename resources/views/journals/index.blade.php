@@ -14,13 +14,10 @@
 					<label for="">TYPE DE PAIMENENT</label>
 					
 				</div>
-				{{-- <div class="col-sm-6">
-					<select class="form-control" name="type_paiement" id="">
-						<option value="DETTE">DETTE</option>
-						<option value="EN CACHE">EN CACHE</option>
-					</select>
+				<div class="col-sm-6">
+					<a class="btn btn-secondary" href="{{ route('paimenet_dette') }}"> Paiment des dettes</a>
 					
-				</div> --}}
+				</div>
 				
 			</form>
 		</div>

@@ -81,7 +81,7 @@ class ProductController extends Controller
 
         Product::create($request->all());
 
-        return back();
+        return back()->with('success', 'Enregistrement réussi');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Depense;
+use App\Models\DetailPaimentDette;
 use App\Models\FollowProduct;
 use App\Models\Order;
 use App\Models\Product;
@@ -126,11 +127,30 @@ class StockeController extends Controller
 
         $date_recherche = \Request::get('date_recherche');
 
-        $venteJournaliere = Order::whereDate('created_at','=',Carbon::now())->sum('amount');
+       
+
+        $paiement_dette = DetailPaimentDette::whereDate('created_at','=',Carbon::now())->sum('montant');
+
+        // La vente journaliere + La somme de paiment des dettes
+         $venteJournaliere = Order::where('type_paiement','=','CACHE')->whereDate('created_at','=',Carbon::now())->sum('amount') + $paiement_dette;
+
+         //Historique
+
+         $paiement_dette = DetailPaimentDette::whereDate('created_at','=',$date_recherche)->sum('montant');
+
+
         $vente_date = Order::whereDate('created_at','=',$date_recherche)
                             ->where('type_paiement','=','CACHE')
                             ->sum('amount');
-        $montant_total = Order::all()->sum('amount') - Depense::all()->sum('montant');
+
+        //La somme total du montant en caisse 
+
+        // Tout les factures paye en cache
+       // Tout les paiement des dettes - les depenses
+
+        $paiement_dettes_total = DetailPaimentDette::all()->sum('montant');
+
+        $montant_total = Order::where('type_paiement','=','CACHE')->sum('amount') - Depense::all()->sum('montant') +  $paiement_dettes_total ;
 
         $data_history = DB::select("SELECT name, COUNT(`name`) as nombre_vendu , SUM(`quantite`) as quantite FROM `detail_orders` GROUP by name ORDER BY quantite DESC LIMIT 10");
 

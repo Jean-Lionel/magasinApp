@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\DetailOrder;
 use App\Models\FollowProduct;
 use App\Models\Order;
+use App\Models\PaiementDette;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -67,6 +68,17 @@ class CheckoutController extends Controller
             ]);
 
             $this->storeTodetailOder($order->id);
+
+            if($request->type_paiement == 'DETTE'){
+                //Enregistre les infos dans les dettes
+                PaiementDette::create([
+                    'montant' => Cart::total() ,
+                    'montant_restant' =>Cart::total() ,
+                    'order_id' =>   $order->id ,
+                    'status' => 'NON PAYE'
+
+                ]);
+            }
 
              Cart::destroy();
 
@@ -163,5 +175,15 @@ class CheckoutController extends Controller
         }
 
         return $products;
+    }
+
+    public function paimenetDette(){
+
+        $dettes = PaiementDette::sortable()->where('status','=','NON PAYE')
+        ->orWhere('montant_restant','>',0)
+        ->paginate();
+
+       
+        return view('checkout.paimenet_dette', compact('dettes'));
     }
 }
