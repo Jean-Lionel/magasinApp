@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facture MAGASIN APP</title>
+    <title>Facture MAGASIN LE LEADER</title>
     <link rel="stylesheet" href="{{ asset('css/print.min.css') }}">
 
     <script src="{{ asset('js/print.min.js') }}"></script>
@@ -21,68 +21,67 @@
 
             <a href="{{ route('ventes.index') }}">Retourner</a>
         </div>
-        <header>
-         <div class="header-facture">FACTURE</div>
+     
+         <div class="header-facture">
+             <h3>NDIKUMANA Jacqueline</h3>
+             <span>ndikumanajacky@gmail.com</span>
+         </div>
 
-         <div>N° {{ $order->id }} du {{ $order->created_at->format('d-m-Y') }}</div>
+         <div class="fac_title">FACTURE PROFORMAT N° {{ $order->id }} du {{ $order->created_at->format('d-m-Y') }}</div>
 
-     </header>
+
+  
 
      <main>
-        <h5>A. Indentification du vendeur</h5>
-
-        <span>Nom et Prénom ou Raison Social :<b> NDIKUMANA JACQUELINE </b></span>
-
-
-        <div class="header-doc">
-
-            <div>
-                NIF : 4001 272899 <br>
-                Registre de commerce N° : 2020202
-                <br>
-                B.P : ..... Tél: 79 903 600 <br>
-                Commune : ......... Quartier: ........
-
-                Av: ....... Rue: .... N°: ...... <br>
-
-                Assujeti à la TVA : OUI ... NON ...  
-            </div>
-
-            <div class="line"></div>
-
-            <div>
-                Centre Fiscale : ....... <br>
-                Secteur d'activité : .... 
-                <br>
-                Forme jurdique : ....
-            </div>
-
-            
-        </div>
+        <h5 style="margin-left: 4pc;">A. Indentification du vendeur</h5>
 
 
     </main>
 
     <section>
-        <h5> Le Client : </h5>
-        Nom et Prénom ou Raison sociale * : {{  collect(json_decode($order->client))->get('name') ?? "" }} <br>
+       {{--  
+ --}}
+        Nom et Prénom ou Raison sociale * : <b>NDIKUMANA Jacqueline</b>  <br>
 
-        TEL : {{  collect(json_decode($order->client))->get('telephone') ?? "" }}  <br>
-        NIF : ............  <br>
-        Résident à : ........... <br>
+        <div style="display: flex; justify-content: space-between;">
 
-        Assujeti à la TVA : OUI 🚒 NON 🚳
+            <span>NIF : 4001272899</span>
+           
+            <span>Centre fiscal : <b>DPMC</b></span>
+        </div>
+
+        <div style="display:flex; justify-content:space-between;">
+            <span>Registre de commerce n° 114146</span>
+            <span>Secteur d'activité : <b>Matériel de Bureau et Divers</b></span>
+        </div>
+
+   {{--      TEL : {{  collect(json_decode($order->client))->get('telephone') ?? "" }}  <br> --}}
+        <div style="display: flex;justify-content: space-between;">
+            <span>Commune <b>MUKAZA</b>, Quartier <b>ROHERO I</b></span>
+
+            <span>Forme jurdique : <b>personne physique</b></span>
+        </div>
+        <div style="margin-top: 3pc; display: flex;justify-content: space-between;">
+            <div>
+                AV . de la Révolution N° 1 <br>
+            Assujetti à la TVA <span class="cadre"></span> Oui <span class="cadre">X</span> Non
+            </div>
+            <div>
+                Client : <b>{{  collect(json_decode($order->client))->get('name') ?? "" }}</b>
+                
+            </div>
+        </div>
 
     </section>
 
-    <h5>dout pour ce qui suit : </h5>
+    <h5>Droit pour ce qui suit : </h5>
 
     <article>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nature de l'articel ou service *</th>
+                    <th>Nature de l'article ou service *</th>
                     <th>Qté *</th>
                     <th> PU*</th>
                     <th>PV-HTVA*</th>

@@ -21,6 +21,7 @@ header{
     padding-top: 20px;
 }
 
+
 .line{
     border: 1px solid black;
 }
@@ -50,11 +51,27 @@ th, tr , td{
 .header-element button{
     display: block;
     cursor: pointer;
+}
 
+.header-facture{
+    text-align: center;
+    padding: 20px;
+    border: 2px solid green;
 }
 
 @media print{
    .noprint{
        display:none;
    }
+}
+
+.fac_title{
+    text-align: center;
+}
+
+.cadre{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
 }

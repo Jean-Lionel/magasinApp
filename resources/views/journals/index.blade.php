@@ -14,13 +14,13 @@
 					<label for="">TYPE DE PAIMENENT</label>
 					
 				</div>
-				<div class="col-sm-6">
+				{{-- <div class="col-sm-6">
 					<select class="form-control" name="type_paiement" id="">
 						<option value="DETTE">DETTE</option>
 						<option value="EN CACHE">EN CACHE</option>
 					</select>
 					
-				</div>
+				</div> --}}
 				
 			</form>
 		</div>
