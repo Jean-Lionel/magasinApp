@@ -18,7 +18,7 @@
 				
 				<th>Date de paiement</th>
 
-				<th>Date de Dette</th>
+				<th>@sortablelink('order_id','Date de Dette')</th>
 				<th>Action</th>
 			
 			</tr>

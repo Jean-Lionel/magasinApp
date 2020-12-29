@@ -6,11 +6,19 @@
  <meta name="csrf-token" content="{{ csrf_token() }}">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+{{--  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
+
+ <link rel="stylesheet" href="{{ asset('/css/css/all.css')  }}">
    @livewireStyles
  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+ <style>
+   body{
+     font-family: Arial, Helvetica,"Times New Roman", sans-serif;
+   }
+ </style>
 
 </head>
 <body>
@@ -29,7 +37,7 @@
       @endcan
 
       <li class="active">
-        <a href="{{ route('products.create') }}"><span class="fa fa-product-hunt"></span> Entre</a>
+        <a href="{{ route('products.create') }}"><span class="fa fa-seedling"></span> Entre</a>
       </li>
 
       @can('is-admin')
@@ -38,7 +46,7 @@
       </li>
 
       <li>
-        <a href="{{ route('rapport') }}"><span class="fa fa-cogs"></span> Rapport</a>
+        <a href="{{ route('rapport') }}"><span class="fa fa-chart-bar"></span> Rapport</a>
       </li>
       <li>
         <a href="{{ route('stockes.journal') }}"><span class="fa fa-calendar"></span> Journal</a>
@@ -154,7 +162,8 @@
 </div>
 
 
-<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="{{ asset('js/jquery-3.5.min.js') }}"></script>
 <script src="{{ asset('js/popper.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/chart.js.2.9.4_Chart.min.js') }}"></script>
