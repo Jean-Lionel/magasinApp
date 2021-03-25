@@ -27,7 +27,7 @@
              <span>ndikumanajacky@gmail.com</span>
          </div>
 
-         <div class="fac_title">FACTURE PROFORMAT N° {{ $order->id }} du {{ $order->created_at->format('d-m-Y') }}</div>
+         <div class="fac_title">FACTURE N° {{ $order->id }} du {{ $order->created_at->format('d-m-Y') }}</div>
 
 
   
