@@ -104,6 +104,13 @@ class OrderController extends Controller
             }
             //$order->details->delete();
 
+           // dd($order->dette);
+          
+            if($order->dette){
+
+                  $order->dette->delete();
+            }
+
             $order->delete();
 
             DB::commit();

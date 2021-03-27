@@ -39,7 +39,7 @@ class ProductController extends Controller
                             ->orWhere('unite_mesure','like', '%'.$search.'%')
                             ->orWhere('marque','like', '%'.$search.'%')
 
-                            ->latest()->paginate(10);
+                            ->latest()->paginate();
 
         return view("products.index", compact('products','search'));
     }

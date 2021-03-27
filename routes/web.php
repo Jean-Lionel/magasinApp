@@ -1,6 +1,7 @@
 <?php
 
 
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('orders', OrderController::class);
 	Route::resource('depenses', DepenseController::class);
 	Route::resource('users', UserController::class);
+	Route::resource('services', ServiceController::class);
 	Route::resource('paimenent_dette' , PaiementDetteController::class);
 	
 	Route::get('update_price', 'CartController@update_product_price')->name('update_price');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PaiementDette;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,6 +43,10 @@ class Order extends Model
 
 	public function details(){
 		return $this->hasMany('App\Models\DetailOrder','order_id');
+	}
+
+	public function dette(){
+		return $this->belongsTo(PaiementDette::class , 'id','order_id');
 	}
 
 	// public function client()

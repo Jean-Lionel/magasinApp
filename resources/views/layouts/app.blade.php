@@ -33,6 +33,9 @@
       <li>
         <a href="{{ route('ventes.index') }}"><span class="fa fa-shopping-cart"></span> Vente</a>
       </li>
+      <li>
+        <a href="{{ route('services.index') }}"><span class="fa fa-cubes"></span> Service</a>
+      </li>
 
       @endcan
 
@@ -90,7 +93,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <h5>MAGASIN LE LEADER</h5>
+          <h5>MAGASIN NDIKUMANA JACQUELINE</h5>
 
            
           <ul class="nav navbar-nav ml-auto">
@@ -113,12 +116,7 @@
                 <button type="submit" class="btn btn-dark btn-sm rounded-bottom"> <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Se deconnecter</button>
               </form>
 
-
-
-
             </li>
-
-           
 
          {{--  <li class="nav-item">
             <a class="nav-link" href="{{ route('stockes.index') }}">Stocke</a>

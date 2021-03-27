@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-md-6">
 			<form action="">
-				<input type="search" name="search" value="{{    $search }}"  class="form-control form-control-sm" placeholder="Rechercher ici ">
+				<input type="search" name="search" id="search" value="{{    $search }}"  class="form-control form-control-sm" placeholder="Rechercher ici ">
 			</form>
 		</div>
 	</div>
@@ -54,8 +54,6 @@
 
 						<button  type="submit" class="btn btn-sm btn-primary">+ Ajouter aux pannier</button>
 					</form>
-
-
 				</td>
 			</tr>
 			@endforeach
@@ -104,3 +102,38 @@
 
 
 @endsection
+
+
+@section('javascript')
+
+<script>
+	const searchEL = $("#search")
+
+	// searchEL.keyup(function(event) {
+	// 	/* Act on the event */
+	// 	event.preventDefault();
+	// 	//console.log(event.target.value)
+	// 	const search = event.target.value
+
+	// 	jQuery.ajax({
+	// 	  url: " {{ route('ventes.index')  }}",
+	// 	  type: 'GET',
+	// 	  data: {search: search},
+	// 	  complete: function(xhr, textStatus) {
+	// 	    //called when complete
+	// 	   // console.log(xhr)
+	// 	  },
+	// 	  success: function(data, textStatus, xhr) {
+	// 	    //called when successful
+		   	
+	// 	  },
+	// 	  error: function(xhr, textStatus, errorThrown) {
+	// 	    //called when there is an error
+	// 	  }
+	// 	});
+		
+	// });
+</script>
+
+
+@stop

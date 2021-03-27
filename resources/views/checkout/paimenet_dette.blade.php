@@ -27,18 +27,20 @@
 		<tbody>
 			@foreach($dettes as $dette)
 			<tr>
-				<td>{{ $dette->id }}</td>
 
-				<td>{{ collect(json_decode($dette->order->client))->get('name') }}</td>
-				<td>{{ $dette->montant }}</td>
-				<td>{{ $dette->montant_restant }}</td>
-				<td>{{ $dette->order->id }}</td>
-				<td>{{ $dette->status }}</td>
-				<td>{{ $dette->created_at }}</td>
-				<td>{{ $dette->order->created_at }}</td>
+				@if($dette->order)
+				<td>{{ $dette->id ?? "" }}</td>
+				<td>{{  collect(json_decode($dette->order->client))->get('name') ??"" }}</td>
+				<td>{{ $dette->montant ?? ""}}</td>
+				<td>{{ $dette->montant_restant ?? "" }}</td>
+				<td>{{ $dette->order->id ?? ""}}</td>
+				<td>{{ $dette->status ?? "" }}</td>
+				<td>{{ $dette->created_at ?? ""}}</td>
+				<td>{{ $dette->order->created_at ?? "" }}</td>
 				<td>
 					<a href="{{ route('paimenent_dette.create',  ['dette' =>$dette]) }}" class="btn btn-primary btn-sm">Paiment</a>
 				</td>
+				@endif
 			</tr>
 
 			@endforeach
