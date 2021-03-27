@@ -49,7 +49,7 @@ class DepenseController extends Controller
     {
         //
 
-         $montant_total = Order::all()->sum('amount') - Depense::all()->sum('montant');
+        $montant_total = Order::all()->sum('amount') - Depense::all()->sum('montant');
 
         $request->validate([
             'name' => 'required|min:2',

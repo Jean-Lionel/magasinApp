@@ -25,7 +25,7 @@
 
   <div class="wrapper d-flex align-items-stretch">
    <nav id="sidebar" class="active">
-    <h1><a href="" class="logo">L.</a></h1>
+    <h1><a href="" class="logo">J.</a></h1>
     <ul class="list-unstyled components mb-5">
 
       @can('is-vente')
@@ -108,12 +108,16 @@
 
             </li>
           
-            <li class="nav-item">
+            <li class="nav-item ml-2">
 
               <form action="{{ route('logout') }}" method="post">
                 @csrf
                 @method('POST')
-                <button type="submit" class="btn btn-dark btn-sm rounded-bottom"> <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Se deconnecter</button>
+                <button type="submit" class="btn btn-dark btn-sm rounded-bottom">
+
+                  <i class="fa fa-power-off fa-2x" aria-hidden="true" title=" Se deconnecter"></i>
+
+                 
               </form>
 
             </li>

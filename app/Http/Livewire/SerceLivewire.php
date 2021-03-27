@@ -41,6 +41,7 @@ class SerceLivewire extends Component
 	    	'montant' => $this->montant,
 	    	'quantite' => $this->quantite,
 	    	'description' => $this->description,
+            'total' => $this->montant * $this->quantite,
     	];
 
     	if($this->identification)

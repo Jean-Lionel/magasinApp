@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 {{-- StockController Rapport  --}}
-
-
 @section('content')
 
 <div>
@@ -39,34 +37,38 @@
 					</form>
 				</div>
 
-				<div class="card card-body">
-					<h4 class="text-center"># {{ getPrice( $vente_date) }} FBU</h4>
+				<div class="card card-body" >
+					<div class="d-flex justify-content-between">
+						<b class="text-center">PRODUIT</b>
+						<b class="text-center">SERVICE</b>
+					</div>
+					<div class="d-flex justify-content-between">
+						<b class="text-center"># {{ getPrice( $vente_date) }} FBU</b>
+						<b class="text-center"># {{ getPrice( $service_Date) }} FBU</b>
+					</div>
 				</div>
 
 			</div>
 		</div>
-
-
 
 		<div class="col-md-4">
 				
 
 				<div class="card card-body border-d">
 
-					<ul class="list-group">
-						<li class="list-group-item">
-							<p class="text-center">Total du montant du caisse</p>
+					<div class="d-flex justify-content-between">
+						<p class="text-center">MOTANT TOTAL DU CAISSE</p>
+						<p class="text-center">TOTAL DES DETTES</p>
+						
+					</div>
 
-							<b class="text-center"># {{ getPrice( $montant_total) }} FBU</b>
-						</li>
-						<li class="list-group-item">
-							<p class="text-center">TOTAL DES DETTES</p>
+					<div class="d-flex justify-content-between">
+						<p class="text-center"># {{ getPrice( $montant_total) }} FBU</p>
+						<p class="text-center"># {{ getPrice( $totalDette) }} FBU</p>
+						
+					</div>
 
-							<b class="text-center"># {{ getPrice( $totalDette) }} FBU</b>
-							
-						</li>
-					</ul>
-					
+				
 				</div>
 
 		</div>

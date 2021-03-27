@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('type');
             $table->double('montant',64,2);
             $table->double('quantite',64,2);
+            $table->double('total',64,2);
             $table->text('description')->nullable();
             $table->foreignId('user_id');
             $table->timestamps();
