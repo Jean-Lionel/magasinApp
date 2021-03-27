@@ -183,7 +183,9 @@ class CheckoutController extends Controller
         ->orWhere('montant_restant','>',0)
         ->paginate();
 
+        $totalDette = PaiementDette::all()->where('montant_restant','>',0)->sum('montant_restant');
+
        
-        return view('checkout.paimenet_dette', compact('dettes'));
+        return view('checkout.paimenet_dette', compact('dettes','totalDette'));
     }
 }

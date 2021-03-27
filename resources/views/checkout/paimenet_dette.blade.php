@@ -5,7 +5,9 @@
 @section('content')
 
 <div>
-
+	<div>
+		<h5 class="text-right">TOTAL DES DETTES : {{ getPrice($totalDette) }} #FBU</h5>
+	</div>
 	<table class="table table-secondary">
 		<thead class="badge-dark">
 			<tr>

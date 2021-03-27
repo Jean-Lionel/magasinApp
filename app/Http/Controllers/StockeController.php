@@ -6,6 +6,7 @@ use App\Models\Depense;
 use App\Models\DetailPaimentDette;
 use App\Models\FollowProduct;
 use App\Models\Order;
+use App\Models\PaiementDette;
 use App\Models\Product;
 use App\Models\Stocke;
 use Illuminate\Http\Request;
@@ -165,9 +166,11 @@ class StockeController extends Controller
 
        // dd($depenses);
 
+          $totalDette = PaiementDette::all()->where('montant_restant','>',0)->sum('montant_restant');
+
 
         return view('journals.rapport', 
-            compact('venteJournaliere','date_recherche','labels','vente_date','montant_total', 'data'));
+            compact('venteJournaliere','date_recherche','labels','vente_date','montant_total', 'data','totalDette'));
     }
 
 

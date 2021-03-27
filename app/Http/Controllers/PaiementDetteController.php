@@ -16,7 +16,7 @@ class PaiementDetteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         //ceci est definit dans checkOutController
 
     }

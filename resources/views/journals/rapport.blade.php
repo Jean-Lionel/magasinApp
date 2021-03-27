@@ -49,19 +49,28 @@
 
 
 		<div class="col-md-4">
+				
 
-			<div class="card border-danger">
-				<div class="card card-header">
-					<h5 class="text-center">Total du montant du caisse</h5>
+				<div class="card card-body border-d">
+
+					<ul class="list-group">
+						<li class="list-group-item">
+							<p class="text-center">Total du montant du caisse</p>
+
+							<b class="text-center"># {{ getPrice( $montant_total) }} FBU</b>
+						</li>
+						<li class="list-group-item">
+							<p class="text-center">TOTAL DES DETTES</p>
+
+							<b class="text-center"># {{ getPrice( $totalDette) }} FBU</b>
+							
+						</li>
+					</ul>
+					
 				</div>
 
-				<div class="card card-body">
-					<h4 class="text-center"># {{ getPrice( $montant_total) }} FBU</h4>
-				</div>
-
-			</div>
 		</div>
-
+	
 
 	</div>
 
