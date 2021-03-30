@@ -69,7 +69,7 @@ class SerceLivewire extends Component
 		$this->quantite = $service->quantite;
     }
 
-    public function getTotalProperty()
+    public function getTotalProperty() 
     {
         return floatval($this->montant) * floatval($this->quantite);
     }
