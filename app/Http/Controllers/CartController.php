@@ -63,8 +63,7 @@ class CartController extends Controller
         $diplucata = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id == $request->id;
         });
-
-
+        
         if($diplucata->count()){
             return redirect()->route('ventes.index')->with('success', 'Le produit existe déjà ');
         }

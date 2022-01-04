@@ -25,10 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function () {
     //
 	Route::get('/', 'VenteController@index');
-	
-
 	Route::get('product/create', 'ProductController@create')->name('product.create');
-
 	Route::resource('stockes', StockeController::class);
 	Route::resource('products', ProductController::class);
 	Route::resource('clients', ClientController::class);
@@ -45,38 +42,19 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('update_quantite', 'CartController@update_quantite')->name('update_quantite');
 	Route::get('rapport', 'StockeController@rapport')->name('rapport');
 
-
 //Cart ROUTE
-
-
 	Route::post('panier/ajouter','CartController@store')->name('panier.store');
 	Route::get('panier/index','CartController@index')->name('panier.index');
 	Route::delete('panier/{id}', 'CartController@destroy')->name('cart.destroy');
-
-
 	Route::post('update_panier', 'CartController@updatePanier')->name('cart.update_panier');
-
-
 	Route::get('journal', 'StockeController@journal')->name('stockes.journal');
-
-
 	Route::get('/vider', function(){
 		Cart::destroy();
 	});
-
 //Checkout Router PayMent
-
 	Route::post('payement','CheckoutController@store')->name('payement');
 	Route::post('add_quantite_stock','ProductController@add_quantite_stock')->name('add_quantite_stock');
 	Route::get('add_view/{product}','ProductController@add_view')->name('add_view');
-
-
 	Route::get('bon_entre', 'StockeController@bonEntre')->name('bon_entre');
-
-
 	Route::get('paimenet_dette', 'CheckoutController@paimenetDette')->name('paimenet_dette');
-
-
-
-
 });

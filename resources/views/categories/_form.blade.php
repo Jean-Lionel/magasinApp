@@ -22,7 +22,7 @@
 
 			<div class="col-md-12">
 				<div class="form-group">
-					<label for="title">STOCKE</label>
+					<label for="title">STOCK</label>
 
 					<select name="stock_id" id="" class="form-control {{$errors->has('stock_id') ? 'is-invalid' : 'is-valid' }}">
 						

@@ -103,7 +103,6 @@ class OrderController extends Controller
                 $value->delete();
             }
             //$order->details->delete();
-
            // dd($order->dette);
           
             if($order->dette){
